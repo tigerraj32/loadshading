@@ -18,12 +18,12 @@ export default class GroupCell extends Component {
       const currentdate = new Date();
       const from  = this.props.item.from.split(":");
       const to  = this.props.item.to.split(":");
-      
+
       const fromDate = new Date(currentdate.getFullYear(),currentdate.getMonth(),currentdate.getDay(),from[0] ,from[1],currentdate.getSeconds(),0);
       const toDate = new Date(currentdate.getFullYear(),currentdate.getMonth(),currentdate.getDay(),to[0] ,to[1],currentdate.getSeconds(),0);
-      //console.log(this.props.item.from + '  ' + this.props.item.to);
-      //console.log('currentdate: '+ currentdate + ' fromDate: ' +fromDate +' toDate ' + toDate);
-      //console.log(fromDate.getTime() + ' -- ' +toDate .getTime() + ' ---- '+ currentdate.getTime());
+      console.log(this.props.item.from + '  ' + this.props.item.to);
+      console.log('currentdate: '+ currentdate + ' fromDate: ' +fromDate +' toDate ' + toDate);
+      console.log(fromDate.getTime() + ' -- ' +toDate .getTime() + ' ---- '+ currentdate.getTime());
 
 
     return(
@@ -36,7 +36,11 @@ export default class GroupCell extends Component {
           <Text > {this.props.item.from} - {this.props.item.to}  </Text>
         </View>
         <View style={styles.status}>
-          <Image source={(currentdate.getTime()>=fromDate.getTime() && currentdate.getTime() <= toDate.getTime())?on:off} style={styles.icon}/>
+          {
+            (currentdate.getDay()==this.props.rowID)
+            ?<Image source={(currentdate.getTime()>=fromDate.getTime() && currentdate.getTime() <= toDate.getTime())?off:on} style={styles.icon}/>
+            :null
+          }
         </View>
 
 
